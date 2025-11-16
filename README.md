@@ -24,21 +24,123 @@ Saya menggunakan sebuah database yang berisi tiga tabel utama, yaitu: courses, l
 ## Penjelasan Desain Program ##
 1. Bagian Model (Course.php, Lecturer.php, DB.php)
    Bagian ini adalah bagian yang berhubungan langsung dengan database.
-
-   - DB.php, File ini berfungsi sebagai pengatur koneksi database. Jadi setiap kali Controller atau Model butuh query, mereka tinggal memanggil fungsi dari DB.php, tanpa perlu bikin koneksi berulang kali.
+   a. DB.php, File ini berfungsi sebagai pengatur koneksi database. Jadi setiap kali   Controller atau Model butuh query, mereka tinggal memanggil fungsi dari DB.php, tanpa perlu bikin koneksi berulang kali.
 Di sini juga disediakan fungsi eksekusi query berbasis prepared statement, jadi query lebih aman dan tidak rawan SQL Injection.
-- Course.php & Lecturer.php
-Dua file ini jadi “wakil" tabel dalam database.
-Tugasnya:
+   b. Course.php
+      Berisi fungsi-fungsi CRUD untuk data course:
+      - mengambil daftar course
+      - menambah course baru
+      - mengedit course
+      - menghapus course
+      Setiap query yang ada di sini berjalan lewat DB.php dan semuanya menggunakan prepared statement.
+   c. Lecturer.php
+      Fungsinya sama seperti Course.php, tetapi khusus mengelola data Lecturer.
+Model–model ini hanya fokus pada pemrosesan data, tanpa tahu apa yang terjadi di tampilan.
 
-mengambil data
+2. View
+   view bagian yg bertugas menampilkan halaman ke pengguna. Dalam program ini terdapat 3 file view:
+   - CourseView.php
+   - LecturerView.php
+   - Departments.php
+   ketiga file ini menghasilkan tampilan berbentuk tabel yang berisi daftar seluruh data yang ada di database. Di bagian ini juga terdapat form untuk menambah atau mengedit data. View tidak memanggil database secara langsung, melainkan menerima data dari Controller.
 
-menambah data
+3. Controller merupakan pengatur alur logika. Ada tiga controller:
+   - CourseController.php
+   - LecturerController.php
+   - DepartmentsController.php
+   
+   Fungsi controller antara lain:
+   - menerima permintaan dari user (add, edit, delete)
+   - memanggil fungsi yang tepat dari Model
+   - mengambil data dari Model
+   - mengirim data tersebut ke View
 
-mengubah data
+     Controller tidak menyimpan data dan tidak menampilkan data, ia hanya mengatur prosesnya.
 
-menghapus data
+4. templates/*.html
+   Berisi:
+   - form input
+   - navbar
+   - table
+   - placeholder (string yang akan digantikan view)
 
-Semua perintah SQL yang ada di sini memakai prepared statement bawaan DB.php.
 
-Jadi bagian Model benar-benar fokus ke pengelolaan data.
+## Penjelasan Alur kode ##
+
+1. User Membuka URL, misal: index.php?page=course
+   yang pertama kali dijalankan adalah index.php.
+   - index.php membaca parameter page
+   - berdasarkan nilai page, index akan memanggil Controller yang sesuai
+   - Contoh: page=course memanggil CourseController, page=lecturer memanggil LecturerController
+   Jadi index.php cuma bertugas mengarahkan jalur saja.
+
+2. Controller Dipanggil
+   Contoh: user membuka menu Course, CourseController dipanggil.
+   Di dalam CourseController.php:
+   - Controller membuat objek model, $this->course = new Course($db);
+   - Controller juga memanggil View, $this->view = new CourseView();
+   
+   Artinya:
+   - Model disiapkan untuk mengambil data dari database.
+   - View disiapkan untuk menampilkan hasil.
+   
+   Kemudian Controller memeriksa aksi (action):
+   - tampil data
+   - tambah data
+   - hapus data
+   - update data
+
+Contoh, untuk menampilkan halaman awal Course:
+
+$this->course->getAllCourse();
+$this->view->render($data);
+
+3. Model Mengambil Data ke Database
+   Model ini tidak melakukan query mentah, tapi lewat DB.php.
+
+   Contoh fungsi di model:
+   public function getAllCourse() {
+  $query = "SELECT * FROM course";
+  return $this->db->executeSelectQuery($query);
+}
+
+4️. DB.php Menjalankan Prepared Statement
+   DB.php adalah inti koneksi database.
+   Ketika model memanggil:
+   executeSelectQuery("SELECT * FROM course");
+   
+   DB.php melakukan:
+   - prepare()
+   - bind_param() (kalau ada parameter)
+   - execute()
+   - get_result()
+   
+   DB.php adalah jantungnya database.
+
+5. Model Mengirimkan Data ke Controller
+   Model mengembalikan hasil query dalam bentuk array atau objek.
+   Contoh: $courses = $this->course->getAllCourse();
+   Isi $courses adalah data semua matakuliah dari database.
+   Controller menerima data ini, lalu mengirimkannya ke view.
+
+6. Controller Mengirim Data ke View
+    Controller mengirimkan data ke view seperti: $this->view->render($courses);
+    Tugas view:
+    - menerima data dari controller
+    - menampilkannya dalam bentuk tabel HTML
+
+7️. View Menampilkan Data ke User
+
+   File seperti views/CourseView.php, views/LecturerView.php
+   
+   View akan mengolah data (tanpa melakukan query) menjadi tampilan HTML.
+   Contoh di CourseView:
+   foreach ($data as $course) {
+     echo "<td>".$course['name']."</td>";
+   }
+   
+   View hanya menampilkan. Tidak ada logika database di sini.
+
+8. User Melakukan Aksi (Tambah, Hapus, Edit)
+   Ketika user klik "Tambah" pada Course:
+   user diarahkan ke URL contoh : index.php?page=course&action=add
