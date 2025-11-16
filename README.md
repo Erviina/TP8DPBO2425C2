@@ -89,11 +89,10 @@ Model–model ini hanya fokus pada pemrosesan data, tanpa tahu apa yang terjadi 
    - tambah data
    - hapus data
    - update data
-
-Contoh, untuk menampilkan halaman awal Course:
-
-$this->course->getAllCourse();
-$this->view->render($data);
+   
+   Contoh, untuk menampilkan halaman awal Course:
+   $this->course->getAllCourse();
+   $this->view->render($data);
 
 3. Model Mengambil Data ke Database
    Model ini tidak melakukan query mentah, tapi lewat DB.php.
