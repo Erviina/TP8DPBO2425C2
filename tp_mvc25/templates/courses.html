@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>JUDUL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="index.php"><strong>Courses</strong></a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link text-white" href="lecturer.php">Lecturers</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="departments.php">Departments</a></li>
+      </ul>
+      <span class="navbar-brand text-white"><strong>JUDUL</strong></span>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row my-4">
+    <div class="col-lg-4">
+      <div class="card p-4">
+        <h4>Tambah Course</h4>
+        <form action="index.php" method="POST">
+          <div class="mb-2">
+            <label class="form-label">Course Name</label>
+            <input type="text" name="course_name" class="form-control" required />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">SKS</label>
+            <input type="number" name="sks" class="form-control" required />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Semester</label>
+            <input type="number" name="semester" class="form-control" required />
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Lecturer</label>
+            <select name="lecturer_id" class="form-control">
+              <option value="">-- Pilih Lecturer --</option>
+              OPTION
+            </select>
+          </div>
+          <button type="submit" name="add" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <h3 class="text-center">Tabel Courses</h3>
+      <table class="table table-bordered">
+        <tr class="table-info text-center">
+          <td>No</td><td>Course Name</td><td>SKS</td><td>Semester</td><td>Lecturer</td><td>Aksi</td>
+        </tr>
+        DATA_TABEL
+      </table>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
