@@ -1,5 +1,10 @@
+Saya Ervina Kusnanda dengan NIM 2409082 mengerjakan TP 7 dalam mata kuliah Desain Pemogramana Berorientasi Objek untuk keberkahanNya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin
+
 ## Penjelasan Database / Tabel ##
 Saya menggunakan sebuah database yang berisi tiga tabel utama, yaitu: courses, lecturers, dan departments. Ketiga tabel ini saling berhubungan satu sama lain dan dipakai untuk menyimpan data mata kuliah, data dosen, dan data jurusan.
+
+![Teks alternatif](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/Tabel.png?raw=true)
+
 
 1. Tabel departments, menyimpan informasi mengenai jurusan atau program studi yang ada
    - Kolom id digunakan sebagai identitas unik setiap jurusan.
@@ -143,3 +148,31 @@ Model–model ini hanya fokus pada pemrosesan data, tanpa tahu apa yang terjadi 
 8. User Melakukan Aksi (Tambah, Hapus, Edit)
    Ketika user klik "Tambah" pada Course:
    user diarahkan ke URL contoh : index.php?page=course&action=add
+
+
+## Dokumentasi ##
+CRUD courses
+
+![Add Courses](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/add%20courses.gif?raw=true)
+
+![Edit/update courses](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/edit%20course.gif?raw=true)
+
+![Delete courses](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/hapus%20course.gif?raw=true)
+
+CRUD lecturer
+
+![Add lecturer](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/add%20lecturer.gif?raw=true)
+
+![edit lecturer ](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/edit%20lecturer.gif?raw=true)
+
+![hapus lecturer ](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/hapus%20lecturer.gif?raw=true)
+
+CRUD Department
+
+![Add department ](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/add%20department.gif?raw=true)
+
+![Edit Department ](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/edit%20department.gif?raw=true)
+
+![hapus department](https://github.com/Erviina/TP8DPBO2425C2/blob/main/Dokumentasi/hapus%20department.gif?raw=true)
+
+
