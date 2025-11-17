@@ -1,4 +1,4 @@
-Saya Ervina Kusnanda dengan NIM 2409082 mengerjakan TP 7 dalam mata kuliah Desain Pemogramana Berorientasi Objek untuk keberkahanNya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin
+Saya Ervina Kusnanda dengan NIM 2409082 mengerjakan TP 8 dalam mata kuliah Desain Pemogramana Berorientasi Objek untuk keberkahanNya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin
 
 ## Penjelasan Database / Tabel ##
 Saya menggunakan sebuah database yang berisi tiga tabel utama, yaitu: courses, lecturers, dan departments. Ketiga tabel ini saling berhubungan satu sama lain dan dipakai untuk menyimpan data mata kuliah, data dosen, dan data jurusan.
